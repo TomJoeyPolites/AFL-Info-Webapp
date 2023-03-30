@@ -1,0 +1,723 @@
+// Main SCSS File
+
+/*
+-vendor imports
+-base importss
+-components imports
+-page imports
+-layout imports
+*/
+
+//? FOOTY Colours
+$primaryText: #FFFFFF;
+$priGreen: #2A7211;
+$secGreen: #609721;
+$secGreenOp5: rgb(96, 151, 33, 0.5);
+$darkGreen: #1D4F17;
+$priRed: #E21E31;
+$secRed: #E5384A;
+$darkRed: #B51727;
+$priBlue: #00529B;
+$secBlue: #3382c7;
+$darkBlue: #1B00A4;
+
+//Adelaide
+$adeTheme: #043967, #E21937, #FFD30A;
+
+$briTheme: #7D003E, #084ABF, #FDBF56;
+
+//Carlton
+$carTheme: #031A29, #F7F7F7, #AFB8C9;
+
+//Collingwood
+$colTheme: #000000, #FFFFFF, #AB9867;
+
+//Essendon
+$essTheme: #000000, #CC2031, #BEBFC1;
+
+//Fremantle
+$freTheme: #290C54, #FCFBFC, #58358d;
+
+//Geelong
+$geeTheme: #00275C, #E8EBF0, #010101;
+
+//Gold Coast 
+$gdcTheme: #EE3124, #FFDD00, #0078C0;
+
+//GWS
+$gwsTheme: #FF7B00, #2E2E2E, #FFFFFF;
+
+//Hawthorn
+$hawTheme: #FBBF15, #734208, #100F0D;
+
+//Melbourne
+$melTheme: #031938, #CD2031, #E8EBF0;
+
+//NorthMelbourne
+$nthTheme: #043C9D, #FFFFFF, #BCBCBC;
+
+//Port Adelaide
+$padTheme: #000000, #008BAD, #FFFFFF;
+
+//Richmond
+$ricTheme: #000000, #FFD205, #FFFFFF;
+
+//St Kilda
+$stkTheme: #000000, #EE142B, #FFFFFF;
+
+//Sydney
+$sydTheme: #FFFFFF, #E22014, #2D77DA;
+
+//West Coast
+$wcsTheme: #01308A, #F3A801, #FFFFFF;
+
+//Western Bulldogs
+$wbdTheme: #20539D, #BD002B, #FFFFFF;
+
+$teamName: (
+  "Adelaide",
+  "BrisbaneLions",
+  "Carlton",
+  "Collingwood",
+  "Essendon",
+  "Fremantle",
+  "Geelong",
+  "GoldCoast",
+  "GreaterWesternSydney",
+  "Hawthorn",
+  "Melbourne",
+  "NorthMelbourne",
+  "PortAdelaide",
+  "Richmond",
+  "StKilda",
+  "Sydney",
+  "WestCoast",
+  "WesternBulldogs"
+);
+
+$mode: (
+  "lightMode",
+  "darkMode"
+);
+
+
+//* Bootstrap Variables
+//!EXAMPLE - remove if not needed
+//? https://getbootstrap.com/docs/5.3/customize/color/
+// $light: $brandColor;
+
+//? EG: $grid-breakpoints
+//? EG: $spacer
+//? https://getbootstrap.com/docs/5.3/customize/options/
+
+//! MUST BE FIRST IN MAIN:  @use './vendor/bootstrap'
+//? Bootstrap @import - https://getbootstrap.com/docs/5.3/customize/sass/
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+//? ROOT
+
+.row,
+.col,
+.container {
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a {
+  color: #000000;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+//*MIXIN
+@mixin darkMode {
+  background-color: #222222;
+  color: $secBlue;
+
+  .navbar {
+    background-color: $darkGreen;
+
+    a {
+      color: #FFFFFF;
+    }
+
+    a.active {
+      background-color: $priGreen ;
+    }
+
+    .navbar-nav {
+      a:hover {
+        background-color: $priGreen ;
+      }
+    }
+  }
+}
+
+@mixin darkMode-Ladder {
+  tbody {
+    background-color: #06295a;
+    color: $primaryText;
+  }
+
+  thead {
+    background-color: $darkBlue;
+    color: $primaryText;
+  }
+}
+
+
+@mixin select-style {
+  border: 2px solid $secBlue;
+  text-align: center;
+  margin-left: 28%;
+  width: 45%;
+}
+
+
+//?COMPONENTS
+
+//?Common
+
+
+
+.yearRound {
+  margin: 1rem 0 2rem 0;
+
+  select {
+    @include select-style;
+  }
+}
+
+//*Navigate
+
+.navbar {
+
+  background-color: $priGreen;
+
+  .container {
+    padding: 0;
+  }
+
+  a {
+    color: #FFFFFF;
+    margin: 0 2rem;
+    padding: 0.5rem 1rem;
+  }
+
+  a.active {
+    background-color: $darkGreen ;
+    border-radius: 1.5rem;
+  }
+
+  span {
+    margin: 0;
+    padding: 0;
+
+    a {
+      margin: 0;
+    }
+  }
+
+  .navbar-nav {
+    margin: 0;
+
+    a:hover {
+      background-color: $darkGreen ;
+      border-radius: 1.5rem;
+    }
+  }
+
+  @each $mode,
+  $i in $mode {
+    form div {
+      &.#{$mode} {
+        @if $mode =="darkMode" {
+          @include darkMode;
+        }
+      }
+    }
+  }
+}
+
+//?PAGES 
+//* HOME
+
+.heroImg {
+  height: 30vh;
+  width: auto;
+  background-image: url("./img/oval1-1920x1278-JanPiatkowski.jpg");
+  background-repeat: no-repeat;
+}
+
+.heroSection {
+  color: $primaryText;
+  height: 30vh;
+
+  h1 {
+    margin: 1rem 1rem 2rem 1rem;
+  }
+
+  h3 {
+    margin: 0 6rem 2rem 0;
+  }
+
+  h5 {
+    padding: 0 2rem;
+    line-height: 2rem;
+  }
+}
+
+
+//*TeamPage - TeamInfo, TeamLadder, TeamRounds
+
+@mixin teamPage($theme1, $theme2, $theme3) {
+  background-color: $theme1;
+  color: $theme3;
+
+  h1 {
+    margin: 1rem 0 2rem 0;
+  }
+
+  img {
+    height: 200px;
+    width: auto;
+    margin-bottom: 1rem;
+  }
+
+  .year {
+    margin-bottom: 2rem;
+
+    h4 {
+      text-align: end;
+      margin-right: 4rem;
+    }
+  }
+
+  select {
+    @include select-style;
+    border: 2px solid $theme2;
+    background-color: $theme1;
+    color: $theme3;
+    margin-left: 0;
+  }
+
+  table {
+    color: $theme3;
+  }
+
+  tr {
+    background-color: $theme1;
+    border-bottom: none;
+  }
+
+  .game {
+    border: 2px solid $theme2;
+  }
+
+  #homeWin .homeTeam .home,
+  #awayWin .awayTeam .away {
+    background-color: $priGreen;
+  }
+}
+
+@mixin teamPage-img-alt {
+  img {
+    padding: 1rem;
+    background-color: #FFFFFF;
+    border-radius: 4rem;
+  }
+}
+
+
+
+
+@each $teamName,
+$i in $teamName {
+  .bg#{$teamName} {
+    @if $teamName =="Adelaide" {
+      @include teamPage(nth($adeTheme, 1), nth($adeTheme, 2), nth($adeTheme, 3));
+
+      img {
+        margin-right: 2rem;
+      }
+    }
+
+    @else if $teamName =="BrisbaneLions" {
+      @include teamPage(nth($briTheme, 1), nth($briTheme, 2), nth($briTheme, 3));
+    }
+
+    @else if $teamName =="Carlton" {
+      @include teamPage(nth($carTheme, 1), nth($carTheme, 2), nth($carTheme, 2));
+
+      @include teamPage-img-alt;
+    }
+
+    @else if $teamName =="Collingwood" {
+      @include teamPage(nth($colTheme, 1), nth($colTheme, 2), nth($colTheme, 3));
+
+      @include teamPage-img-alt;
+    }
+
+    @else if $teamName =="Essendon" {
+      @include teamPage(nth($essTheme, 1), nth($essTheme, 2), nth($essTheme, 3));
+    }
+
+    @else if $teamName =="Fremantle" {
+      @include teamPage(nth($freTheme, 1), nth($freTheme, 2), nth($freTheme, 2));
+    }
+
+    @else if $teamName =="Geelong" {
+      @include teamPage(nth($geeTheme, 1), nth($geeTheme, 2), nth($geeTheme, 2));
+    }
+
+    @else if $teamName =="GoldCoast" {
+      @include teamPage(nth($gdcTheme, 3), nth($gdcTheme, 1), nth($gdcTheme, 2));
+    }
+
+    @else if $teamName =="GreaterWesternSydney" {
+      @include teamPage(nth($gwsTheme, 2), nth($gwsTheme, 1), nth($gwsTheme, 3));
+      ;
+    }
+
+    @else if $teamName =="Hawthorn" {
+      @include teamPage(nth($hawTheme, 2), nth($hawTheme, 1), nth($hawTheme, 1));
+      ;
+    }
+
+    @else if $teamName =="Melbourne" {
+      @include teamPage(nth($melTheme, 1), nth($melTheme, 2), nth($melTheme, 3));
+    }
+
+    @else if $teamName =="NorthMelbourne" {
+      @include teamPage(nth($nthTheme, 1), nth($nthTheme, 2), nth($nthTheme, 2));
+      @include teamPage-img-alt;
+    }
+
+    @else if $teamName =="PortAdelaide" {
+      @include teamPage(nth($padTheme, 1), nth($padTheme, 2), nth($padTheme, 3));
+    }
+
+    @else if $teamName =="Richmond" {
+      @include teamPage(nth($ricTheme, 1), nth($ricTheme, 2), nth($ricTheme, 2));
+    }
+
+    @else if $teamName =="StKilda" {
+      @include teamPage(nth($stkTheme, 1), nth($stkTheme, 2), nth($stkTheme, 3));
+      @include teamPage-img-alt;
+
+      img {
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    @else if $teamName =="Sydney" {
+      @include teamPage(nth($sydTheme, 1), nth($sydTheme, 2), #000000);
+    }
+
+    @else if $teamName =="WestCoast" {
+      @include teamPage(nth($wcsTheme, 1), nth($wcsTheme, 2), nth($wcsTheme, 2));
+    }
+
+    @else if $teamName =="WesternBulldogs" {
+      @include teamPage(nth($wbdTheme, 1), nth($wbdTheme, 2), nth($wbdTheme, 3));
+    }
+  }
+}
+
+//*TEAMS
+
+//! Create @mixin teamCard($theme1, $theme2, $theme3)
+
+@each $teamName,
+$i in $teamName {
+  #teamCard {
+    &.#{$teamName}.row {
+      @if $teamName =="Adelaide" {
+        background-color: nth($adeTheme, 1);
+        border: 5px solid nth($adeTheme, 2);
+        color: nth($adeTheme, 3);
+
+        a {
+          color: nth($adeTheme, 3);
+        }
+      }
+
+      @else if $teamName =="BrisbaneLions" {
+        background-color: nth($briTheme, 1);
+        border: 5px solid nth($briTheme, 2);
+        color: nth($briTheme, 3);
+
+        a {
+          color: nth($briTheme, 3);
+        }
+      }
+
+      @else if $teamName =="Carlton" {
+        background-color: nth($carTheme, 2);
+        border: 5px solid nth($carTheme, 1);
+        color: nth($carTheme, 1);
+
+        a {
+          color: nth($carTheme, 1);
+        }
+      }
+
+      @else if $teamName =="Collingwood" {
+        background-color: nth($colTheme, 1);
+        border: 5px solid nth($colTheme, 2);
+        color: nth($colTheme, 3);
+
+        a {
+          color: nth($colTheme, 3);
+        }
+      }
+
+      @else if $teamName =="Essendon" {
+        background-color: nth($essTheme, 1);
+        border: 5px solid nth($essTheme, 2);
+        color: nth($essTheme, 3);
+
+        a {
+          color: nth($essTheme, 3);
+        }
+      }
+
+      @else if $teamName =="Fremantle" {
+        background-color: nth($freTheme, 3);
+        border: 5px solid nth($freTheme, 1);
+        color: nth($freTheme, 2);
+
+        a {
+          color: nth($freTheme, 2);
+        }
+      }
+
+      @else if $teamName =="Geelong" {
+        background-color: nth($geeTheme, 1);
+        border: 5px solid nth($geeTheme, 2);
+        color: nth($geeTheme, 2);
+
+        a {
+          color: nth($geeTheme, 2);
+        }
+      }
+
+      @else if $teamName =="GoldCoast" {
+        background-color: nth($gdcTheme, 1);
+        border: 5px solid nth($gdcTheme, 2);
+        color: nth($gdcTheme, 2);
+
+        a {
+          color: nth($gdcTheme, 2);
+        }
+      }
+
+      @else if $teamName =="GreaterWesternSydney" {
+        background-color: nth($gwsTheme, 2);
+        border: 5px solid nth($gwsTheme, 1);
+        color: nth($gwsTheme, 3);
+
+        a {
+          color: nth($gwsTheme, 3);
+        }
+      }
+
+      @else if $teamName =="Hawthorn" {
+        background-color: nth($hawTheme, 1);
+        border: 5px solid nth($hawTheme, 2);
+        color: nth($hawTheme, 2);
+
+        a {
+          color: nth($hawTheme, 2);
+        }
+      }
+
+      @else if $teamName =="Melbourne" {
+        background-color: nth($melTheme, 1);
+        border: 5px solid nth($melTheme, 2);
+        color: nth($melTheme, 3);
+
+        a {
+          color: nth($melTheme, 3);
+        }
+      }
+
+      @else if $teamName =="NorthMelbourne" {
+        background-color: nth($nthTheme, 2);
+        border: 5px solid nth($nthTheme, 1);
+        color: nth($nthTheme, 1);
+
+        a {
+          color: nth($nthTheme, 1);
+        }
+      }
+
+      @else if $teamName =="PortAdelaide" {
+        background-color: nth($padTheme, 1);
+        border: 5px solid nth($padTheme, 2);
+        color: nth($padTheme, 3);
+
+        a {
+          color: nth($padTheme, 3);
+        }
+      }
+
+      @else if $teamName =="Richmond" {
+        background-color: nth($ricTheme, 1);
+        border: 5px solid nth($ricTheme, 2);
+        color: nth($ricTheme, 3);
+
+        a {
+          color: nth($ricTheme, 3);
+        }
+      }
+
+      @else if $teamName =="StKilda" {
+        background-color: nth($stkTheme, 2);
+        border: 5px solid nth($stkTheme, 1);
+        color: nth($stkTheme, 3);
+
+        a {
+          color: nth($stkTheme, 3);
+        }
+      }
+
+      @else if $teamName =="Sydney" {
+        background-color: nth($sydTheme, 1);
+        border: 5px solid nth($sydTheme, 2);
+        color: nth($sydTheme, 2);
+
+        a {
+          color: nth($sydTheme, 2);
+        }
+      }
+
+      @else if $teamName =="WestCoast" {
+        background-color: nth($wcsTheme, 1);
+        border: 5px solid nth($wcsTheme, 2);
+        color: nth($wcsTheme, 2);
+
+        a {
+          color: nth($wcsTheme, 2);
+        }
+      }
+
+      @else if $teamName =="WesternBulldogs" {
+        background-color: nth($wbdTheme, 1);
+        border: 5px solid nth($wbdTheme, 2);
+        color: nth($wbdTheme, 3);
+
+        a {
+          color: nth($wbdTheme, 3);
+        }
+      }
+    }
+  }
+}
+
+
+
+.teams {
+
+  .row {
+    justify-content: center;
+  }
+
+  #teamCard {
+
+    margin: 2rem;
+    padding: 1.5rem 0 1.5rem 0;
+    border: 2px solid $darkBlue;
+    border-radius: 2rem;
+
+
+    .teamLogo {
+      img {
+        height: 10vh;
+        width: auto;
+      }
+    }
+
+    a {
+      padding: 0;
+    }
+
+    h4,
+    h5 {
+      margin: 0;
+    }
+
+    h4 {
+      margin-bottom: 0.5rem;
+    }
+
+    h5 {
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+//*Ladder
+
+tr:nth-child(8) {
+  border-bottom: 2px solid red;
+}
+
+//*Games
+
+.gameContainer {
+  p {
+    padding-left: 1rem;
+    text-align: start;
+    font-style: italic;
+  }
+}
+
+.game {
+  margin: 1rem 0;
+  padding: .5rem 0;
+  border: 2px solid $priBlue;
+  border-radius: 1rem;
+  font-size: large;
+}
+
+#homeWin {
+  .homeTeam .home {
+    margin-left: 25%;
+    width: 50%;
+    border: 2px solid $darkGreen;
+    border-radius: 1rem;
+    background-color: $secGreenOp5;
+    color: $primaryText;
+  }
+}
+
+#awayWin {
+  .awayTeam .away {
+    margin-left: 25%;
+    width: 50%;
+    border: 2px solid $darkGreen;
+    border-radius: 1rem;
+    background-color: $secGreenOp5;
+    color: $primaryText;
+  }
+}
